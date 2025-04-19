@@ -1,0 +1,28 @@
+
+body {
+  background: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+  padding: 2rem;
+  line-height: 1.6;
+}
+h1, h2 {
+  color: #003366;
+}
+a {
+  color: #005bbb;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+nav {
+  background: #003366;
+  padding: 1rem;
+  text-align: center;
+}
+nav a {
+  margin: 0 15px;
+  color: white;
+  font-weight: bold;
+}

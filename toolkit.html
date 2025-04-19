@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What You Can Do Now – Beyond the Bet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans leading-normal tracking-normal p-6">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold text-blue-800 mb-4">What You Can Do Now</h1>
+    <p class="mb-6 text-lg">Take immediate steps to stay on track and out of harm’s way.</p>
+
+    <div class="space-y-6">
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-semibold text-blue-700">1. Use the Impulse Delay Timer</h2>
+        <p class="mt-2">Click the button below to start a calming 2-minute countdown. Breathe. Regroup. Recenter.</p>
+        <button onclick="startTimer()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Start Timer</button>
+        <p id="timerDisplay" class="text-xl font-bold mt-4 text-green-700"></p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-semibold text-blue-700">2. Visualize Your Savings</h2>
+        <p class="mt-2">See how much money you're saving by not gambling.</p>
+        <input id="weeklySpend" type="number" placeholder="How much do you normally spend weekly?" class="mt-2 p-2 border rounded w-full" />
+        <button onclick="calculateSavings()" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Calculate</button>
+        <p id="savingsOutput" class="mt-4 text-lg font-medium text-green-800"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function startTimer() {
+      let time = 120;
+      const display = document.getElementById('timerDisplay');
+      const timer = setInterval(() => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        if (time-- <= 0) clearInterval(timer);
+      }, 1000);
+    }
+
+    function calculateSavings() {
+      const input = document.getElementById('weeklySpend').value;
+      const saved = input * 4;
+      document.getElementById('savingsOutput').textContent = `In just a month, you could save $${saved.toFixed(2)}. That adds up fast!`;
+    }
+  </script>
+</body>
+</html>
