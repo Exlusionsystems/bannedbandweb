@@ -1,52 +1,11 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>What You Can Do Now – Beyond the Bet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 text-gray-900 font-sans leading-normal tracking-normal p-6">
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-4xl font-bold text-blue-800 mb-4">What You Can Do Now</h1>
-    <p class="mb-6 text-lg">Take immediate steps to stay on track and out of harm’s way.</p>
-
-    <div class="space-y-6">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-blue-700">1. Use the Impulse Delay Timer</h2>
-        <p class="mt-2">Click the button below to start a calming 2-minute countdown. Breathe. Regroup. Recenter.</p>
-        <button onclick="startTimer()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Start Timer</button>
-        <p id="timerDisplay" class="text-xl font-bold mt-4 text-green-700"></p>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-blue-700">2. Visualize Your Savings</h2>
-        <p class="mt-2">See how much money you're saving by not gambling.</p>
-        <input id="weeklySpend" type="number" placeholder="How much do you normally spend weekly?" class="mt-2 p-2 border rounded w-full" />
-        <button onclick="calculateSavings()" class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Calculate</button>
-        <p id="savingsOutput" class="mt-4 text-lg font-medium text-green-800"></p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function startTimer() {
-      let time = 120;
-      const display = document.getElementById('timerDisplay');
-      const timer = setInterval(() => {
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        if (time-- <= 0) clearInterval(timer);
-      }, 1000);
-    }
-
-    function calculateSavings() {
-      const input = document.getElementById('weeklySpend').value;
-      const saved = input * 4;
-      document.getElementById('savingsOutput').textContent = `In just a month, you could save $${saved.toFixed(2)}. That adds up fast!`;
-    }
-  </script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Local-only BannedBand support and data-choice demonstrations."><title>Interactive Toolkit — BannedBand</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body data-page="tools"><main id="main"><section><div class="container"><h1>Private support toolkit</h1><p class="lead">Use the tools without an account. Entries remain in this browser and are not sent anywhere.</p><div class="callout"><strong data-t="localOnly"></strong></div><div class="grid grid-2" style="margin-top:22px"><article class="demo-panel"><h2>Impulse delay timer</h2><p>Create a two-minute pause. Breathe slowly, move away from the trigger and contact someone you trust if that would help.</p><button class="button" id="timerStart" data-t="start"></button><p id="timerDisplay" class="sr-status" role="timer" aria-live="polite"></p></article><article class="demo-panel"><h2>Savings visualiser</h2><div class="field"><label for="weeklySpend">Usual weekly gambling spend (NZD)</label><input id="weeklySpend" type="number" min="0" step="1" inputmode="decimal"></div><div class="field"><label for="weeks">Number of weeks</label><input id="weeks" type="number" min="1" step="1" value="4"></div><button class="button" id="calculate" data-t="calculate"></button><p id="savingsOutput" class="sr-status" aria-live="polite"></p></article></div><section id="data-choices" style="padding-left:0;padding-right:0"><h2>Data-choice demonstration</h2><p>This illustrates how choices could be separated in a future pilot. It is not enrolment, clinical consent or a live service.</p><form id="choices" class="demo-panel"><fieldset class="field"><legend>Where should these demo preferences stay?</legend><label class="choice"><input type="radio" name="storage" value="device" checked> On this device only (default)</label><label class="choice"><input type="radio" name="storage" value="pilot" disabled> Share with a BannedBand pilot service — unavailable in this demo</label></fieldset><fieldset class="field"><legend>Optional support-person involvement</legend><label class="choice"><input type="checkbox" id="support"> I would like to discuss access for a whānau or trusted support person in a future service</label><p class="small muted">This does not grant anyone access. A real service would need to identify the person, define what they can see, and provide a way to revoke access.</p></fieldset><div class="field"><label for="retention">Preferred retention for these demo choices</label><select id="retention"><option value="session">Until I close/clear the demo</option><option value="30">30 days (illustration only)</option><option value="90">90 days (illustration only)</option></select></div><fieldset class="field"><legend>Optional cultural and language preferences</legend><label class="choice"><input type="checkbox" id="maoriSupport"> Offer a Māori service/support pathway where available</label><label class="choice"><input type="checkbox" id="languageSupport"> Offer an interpreter or translated service information</label><p class="small muted">Iwi/hapū identity is not requested because it is unnecessary for this demonstration.</p></fieldset><label class="choice"><input type="checkbox" id="understand"> I understand this is a local demonstration and not enrolment in a service</label><p><button type="submit" class="button" data-t="save"></button> <button type="button" class="button secondary" id="receiptButton" data-t="receipt"></button> <button type="button" class="button ghost" id="clearButton" data-t="clear"></button></p><p id="choiceStatus" class="sr-status" aria-live="polite"></p><div id="receipt" class="receipt" aria-live="polite">No consent receipt created.</div></form></section><div class="callout warning"><strong>Safety note:</strong> This toolkit is not emergency or clinical care. If there is immediate danger, contact emergency services. A production version should display verified, local and language-appropriate help services.</div></div></section></main><script>
+let timerId;
+function langText(k){const l=window.BBi18n?.currentLang()||'en';return (window.BBi18n?.T[l]||window.BBi18n?.T.en)[k]}
+document.addEventListener('DOMContentLoaded',()=>{const saved=JSON.parse(localStorage.getItem('bb-demo-choices')||'null');if(saved){support.checked=!!saved.support;retention.value=saved.retention||'session';maoriSupport.checked=!!saved.maoriSupport;languageSupport.checked=!!saved.languageSupport;understand.checked=!!saved.understand}
+timerStart.addEventListener('click',()=>{clearInterval(timerId);let t=120;const show=()=>timerDisplay.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;show();timerId=setInterval(()=>{t--;show();if(t<=0){clearInterval(timerId);timerDisplay.textContent='Pause complete — choose your next safe step.'}},1000)});
+calculate.addEventListener('click',()=>{const a=Math.max(0,Number(weeklySpend.value)||0),w=Math.max(1,Number(weeks.value)||1);savingsOutput.textContent=`${w} ${langText('weeks')} NZ$${(a*w).toFixed(2)}.`});
+choices.addEventListener('submit',e=>{e.preventDefault();if(!understand.checked){choiceStatus.textContent='Please confirm that you understand this is a demonstration.';understand.focus();return}const d=getChoices();localStorage.setItem('bb-demo-choices',JSON.stringify(d));choiceStatus.textContent=langText('saved')});
+receiptButton.addEventListener('click',()=>{const d=getChoices();receipt.textContent=`DEMONSTRATION CHOICE RECEIPT\nCreated: ${new Date().toLocaleString()}\nStorage: this browser/device only\nSupport-person discussion requested: ${d.support?'yes':'no'}\nPreferred retention: ${d.retention}\nMāori support pathway requested: ${d.maoriSupport?'yes':'no'}\nLanguage support requested: ${d.languageSupport?'yes':'no'}\nData transmitted: no\nWithdrawal: use “Clear demo data” below.`});
+clearButton.addEventListener('click',()=>{localStorage.removeItem('bb-demo-choices');choices.reset();receipt.textContent='No consent receipt created.';choiceStatus.textContent=langText('cleared')})});
+function getChoices(){return{storage:'device',support:support.checked,retention:retention.value,maoriSupport:maoriSupport.checked,languageSupport:languageSupport.checked,understand:understand.checked}}
+</script></body></html>
